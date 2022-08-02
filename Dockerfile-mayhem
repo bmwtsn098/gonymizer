@@ -1,4 +1,4 @@
-FROM golang:1.18
+FROM golang:1.18 as builder
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential
@@ -8,4 +8,6 @@ WORKDIR /gonymizer/cmd
 
 RUN go build -o ../bin/gonymizer .
 
-WORKDIR /gonymizer/bin
+# Package Stage
+FROM debian:bookworm-slim
+COPY --from=builder /gonymizer/bin/gonymizer /

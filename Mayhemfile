@@ -1,16 +1,13 @@
 # Namespaced project name that the target belongs to
-project: bmwtsn098/gonymizer
+project: gonymizer
 
 # Target name (should be unique within the project)
 target: gonymizer
 
-# Base image to run the binary in.
-image: ghcr.io/bmwtsn098/gonymizer:latest
-duration: 300
 # List of commands used to test the target
 cmds:
 
     # Command used to start the target, "@@" is the input file
     # (when "@@" is omitted Mayhem defaults to stdin inputs)
-    - cmd: ./gonymizer -c @@ map
+    - cmd: ./gonymizer -c ./fuzzfile.yml map
       filepath: ./fuzzfile.yml
